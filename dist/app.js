@@ -39,6 +39,7 @@
     shield: '<path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4"/>',
     chat: '<path d="M4 5h16v11H9l-5 4z"/>'
   };
+  const HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
   const icon = (name) => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
 
   /* ---------- Toast ---------- */
@@ -101,6 +102,42 @@
     const key = `${id}|${color}`;
     cart.lines.set(key, Math.min((cart.lines.get(key) || 0) + qty, MAX_QTY));
     commitCart();
+  };
+
+  /* ---------- Wishlist (saved items, persisted) ---------- */
+  const WISH_KEY = 'needverse-wish-v1';
+  const wish = new Set();
+  const wishLink = $('.wish-link');
+  const wishCount = $('.wish-count');
+  const loadWish = () => {
+    try { JSON.parse(localStorage.getItem(WISH_KEY) || '[]').forEach((id) => BY_ID.has(id) && wish.add(id)); } catch { /* start empty */ }
+  };
+  const saveWish = () => {
+    try { localStorage.setItem(WISH_KEY, JSON.stringify([...wish])); } catch { /* storage unavailable */ }
+  };
+  const syncWish = () => {
+    wishCount.textContent = wish.size;
+    wishCount.hidden = wish.size === 0;
+    wishLink.setAttribute('aria-label', `Saved items, ${wish.size}`);
+    $$('[data-wish]').forEach((button) => {
+      const on = wish.has(button.dataset.wish);
+      button.setAttribute('aria-pressed', String(on));
+      button.classList.toggle('on', on);
+    });
+  };
+  const EMPTY_WISH = '<div class="wish-empty"><p class="lead">Nothing saved yet. Tap the heart on anything you like and it will wait for you here.</p><a class="button button-dark" href="#/shop">Browse the shop</a></div>';
+  const toggleWish = (id) => {
+    const p = BY_ID.get(id);
+    if (!p) return;
+    const saved = !wish.has(id);
+    if (saved) wish.add(id); else wish.delete(id);
+    saveWish();
+    syncWish();
+    showToast(saved ? `${p.name} saved` : `${p.name} removed from saved`);
+    if (document.body.dataset.view === 'wishlist') {
+      $(`.product-card[data-id="${id}"]`)?.remove();
+      if (!$('.wish-grid .product-card')) $('.wish-grid').outerHTML = EMPTY_WISH;
+    }
   };
 
   /* ---------- Panels (bag + search) ---------- */
@@ -273,6 +310,7 @@
   const card = (p) => `<article class="product-card" data-id="${p.id}">
     <div class="product-image">${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
       <a class="card-link" href="#/product/${p.id}" aria-label="View ${esc(p.name)}" tabindex="-1">${picture(p)}</a>
+      <button class="wish${wish.has(p.id) ? ' on' : ''}" type="button" data-wish="${p.id}" aria-pressed="${wish.has(p.id)}" aria-label="Save ${esc(p.name)} for later">${HEART}</button>
       <button class="quick-add" type="button" aria-label="Add ${esc(p.name)} to bag" data-add>&#65291;</button></div>
     <div class="product-info"><div><h3><a href="#/product/${p.id}">${esc(p.name)}</a></h3><p>${esc(p.short)}</p>${ratingLine(p)}</div><span class="price">${priceHtml(p)}</span></div>
   </article>`;
@@ -459,6 +497,7 @@
               <button class="button button-dark" id="pdp-add" type="button"></button>
             </div>
             <button class="button button-light button-block" id="pdp-buy" type="button">Buy it now</button>
+            <button class="wish-btn${wish.has(p.id) ? ' on' : ''}" type="button" data-wish="${p.id}" aria-pressed="${wish.has(p.id)}">${HEART}<span>Save for later</span></button>
             <ul class="pdp-perks"><li>${icon('truck')}Free standard shipping over ${money(SITE.freeShippingOver)}</li><li>${icon('back')}30-day returns</li><li>${icon('shield')}12-month warranty</li></ul>
             <div class="accordion">
               <details open><summary>Features</summary><ul>${p.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul></details>
@@ -626,6 +665,16 @@
     };
   };
 
+  const wishlistView = () => {
+    const saved = PRODUCTS.filter((p) => wish.has(p.id));
+    return {
+      title: 'Saved items',
+      html: `<section class="section-wrap shop">${crumbs({ label: 'Home', href: '#/' }, { label: 'Saved items' })}
+        <div class="shop-head"><p class="eyebrow">Your list</p><h1>Saved items</h1></div>
+        ${saved.length ? `<div class="product-grid wish-grid">${saved.map(card).join('')}</div>` : EMPTY_WISH}</section>`
+    };
+  };
+
   function notFoundView() {
     return { title: 'Page not found', html: '<section class="section-wrap page"><p class="eyebrow">404</p><h1>Nothing here <em>just yet.</em></h1><p class="lead">That page wandered off. The rest of the edit is right where you left it.</p><a class="button button-dark" href="#/">Back to Needverse</a></section>' };
   }
@@ -635,6 +684,7 @@
     [/^\/?$/, 'home', () => homeView()],
     [/^\/shop(?:\/(home|auto))?$/, 'shop', (m, params) => shopView(m[1], params)],
     [/^\/product\/([a-z0-9-]+)$/, 'product', (m) => productView(m[1])],
+    [/^\/wishlist$/, 'wishlist', () => wishlistView()],
     [/^\/checkout$/, 'checkout', () => checkoutView()],
     [/^\/order$/, 'order', () => orderView()],
     [/^\/page\/([a-z-]+)$/, 'page', (m) => pageView(m[1])]
@@ -751,6 +801,11 @@
 
   document.addEventListener('click', (event) => {
     if (nav.classList.contains('open') && !event.target.closest('.main-nav, .menu-toggle')) setNav(false);
+    const heart = event.target.closest('[data-wish]');
+    if (heart) {
+      toggleWish(heart.dataset.wish);
+      return;
+    }
     const add = event.target.closest('[data-add]');
     if (add) {
       const p = BY_ID.get(add.closest('[data-id]').dataset.id);
@@ -768,6 +823,8 @@
 
   /* ---------- Init ---------- */
   loadCart();
+  loadWish();
   commitCart();
+  syncWish();
   render();
 })();

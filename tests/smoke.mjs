@@ -45,6 +45,18 @@ try {
   await page.click('[data-clear]');
   assert.equal(await cards(), 12);
 
+  // wishlist: save from the grid, see it in the header and on its page, survive a reload
+  await page.goto(`${base}#/shop`);
+  await page.click('.product-card[data-id="lamp"] [data-wish]');
+  assert.equal(await page.locator('.wish-count').textContent(), '1');
+  await page.reload();
+  assert.equal(await page.locator('.wish-count').textContent(), '1');
+  await page.goto(`${base}#/wishlist`);
+  assert.equal(await cards(), 1);
+  await page.click('[data-wish="lamp"]');
+  assert.match(await page.textContent('.wish-empty'), /Nothing saved yet/);
+  assert.equal(await page.locator('.wish-count').isHidden(), true);
+
   // live search suggestions + enter
   await page.click('.search-toggle');
   await page.fill('#search-input', 'massage');
