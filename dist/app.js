@@ -512,9 +512,23 @@
         </section>
         <section class="related"><div class="section-heading"><div><p class="eyebrow">You may also like</p><h2>More from ${cat.label.toLowerCase()}</h2></div><a class="text-link" href="#/shop/${p.cat}">View all <span aria-hidden="true">&#8599;</span></a></div>
           <div class="product-grid">${related.map(card).join('')}</div></section>
+        <div class="sticky-atc" id="sticky-atc" inert><div class="sticky-info"><b>${esc(p.name)}</b><span id="sticky-price"></span></div><button class="button button-dark" type="button" id="sticky-add">Add to bag</button></div>
       </section>`,
       after: () => {
-        const label = () => { $('#pdp-add').textContent = `Add to bag — ${money(p.price * state.qty)}`; $('#pdp-qty').textContent = state.qty; };
+        const label = () => {
+          $('#pdp-add').textContent = `Add to bag — ${money(p.price * state.qty)}`;
+          $('#pdp-qty').textContent = state.qty;
+          $('#sticky-price').textContent = money(p.price * state.qty);
+        };
+        // On small screens a sticky bar keeps "Add to bag" in reach once the main button scrolls away
+        const bar = $('#sticky-atc');
+        stickyObserver = new IntersectionObserver(([entry]) => {
+          const show = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          bar.classList.toggle('show', show);
+          bar.inert = !show;
+        });
+        stickyObserver.observe($('#pdp-add'));
+        $('#sticky-add').addEventListener('click', () => { addToCart(p.id, state.color, state.qty); openBag(); });
         $$('.swatch').forEach((sw) => sw.addEventListener('click', () => {
           state.color = sw.dataset.color;
           $('#pdp-art').innerHTML = picture(p, state.color);
@@ -716,6 +730,7 @@
     }
   };
 
+  let stickyObserver = null;
   let firstRender = true;
   const render = () => {
     const raw = location.hash.startsWith('#/') ? location.hash.slice(1) : '/';
@@ -731,6 +746,8 @@
     if (view.redirect) { location.replace(view.redirect); return; }
 
     cartListeners.clear();
+    stickyObserver?.disconnect();
+    stickyObserver = null;
     closePanels({ restore: false });
     setNav(false);
     document.body.dataset.view = name;

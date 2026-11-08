@@ -136,6 +136,14 @@ try {
   await mobile.click('.menu-toggle');
   await mobile.mouse.click(180, 770);
   assert.equal(await mobile.locator('.main-nav.open').count(), 0);
+  // sticky add-to-bag bar appears once the main button scrolls away
+  await mobile.goto(`${base}#/product/lamp`);
+  assert.equal(await mobile.locator('#sticky-atc.show').count(), 0);
+  await mobile.evaluate(() => window.scrollTo(0, 1600));
+  await mobile.waitForSelector('#sticky-atc.show');
+  await mobile.click('#sticky-add');
+  assert.equal(await mobile.locator('.bag-count').textContent(), '1');
+  await mobile.keyboard.press('Escape');
   for (const hash of ['#/', '#/shop', '#/product/lamp', '#/page/faq']) {
     await mobile.goto(`${base}${hash}`);
     assert.ok(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `overflow on ${hash}`);

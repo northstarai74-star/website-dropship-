@@ -445,6 +445,18 @@ select, textarea { font: inherit; color: var(--ink); background: #fff; border: 1
   .search-close { right: 4%; top: 18px; }
 }
 
+/* Sticky add-to-bag bar (product pages, small screens) */
+.sticky-atc { display: none; }
+@media (max-width: 900px) {
+  .sticky-atc { display: flex; align-items: center; justify-content: space-between; gap: 14px; position: fixed; z-index: 15; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, .96); backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding: 10px 5% calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform .3s cubic-bezier(.2, .7, .2, 1); }
+  .sticky-atc.show { transform: none; }
+  .sticky-info { display: flex; flex-direction: column; min-width: 0; font-size: 13px; }
+  .sticky-info b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sticky-info span { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .sticky-atc .button { height: 46px; flex: none; padding: 0 22px; }
+  [data-view="product"] .toast { bottom: 84px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
 }
