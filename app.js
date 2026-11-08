@@ -430,6 +430,16 @@
     const related = PRODUCTS.filter((o) => o.cat === p.cat && o !== p).slice(0, 4);
     return {
       title: p.name,
+      desc: `${p.name}: ${p.short.toLowerCase()}. ${p.desc}`.slice(0, 300),
+      // Placeholder data: review before launch. Ratings are left out on purpose because they are sample content.
+      ld: {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: p.name,
+        description: p.desc,
+        category: cat.label,
+        offers: { '@type': 'Offer', price: p.price.toFixed(2), priceCurrency: 'USD', availability: 'https://schema.org/InStock' }
+      },
       html: `<section class="section-wrap pdp">
         ${crumbs({ label: 'Home', href: '#/' }, { label: 'Shop', href: '#/shop' }, { label: cat.label, href: `#/shop/${p.cat}` }, { label: p.name })}
         <div class="pdp-grid">
@@ -630,6 +640,32 @@
     [/^\/page\/([a-z-]+)$/, 'page', (m) => pageView(m[1])]
   ];
 
+  const DEFAULT_DESC = 'Needverse — considered essentials for your home and car. Useful little upgrades for the rooms, rides, and routines you live with.';
+  const announcer = $('#route-announcer');
+  const metaTag = (selector, attr, key) => {
+    let tag = $(selector);
+    if (!tag) {
+      tag = document.createElement('meta');
+      tag.setAttribute(attr, key);
+      document.head.append(tag);
+    }
+    return tag;
+  };
+  // Keeps description, social tags and product structured data in step with the current page
+  const setMeta = (title, desc, ld) => {
+    metaTag('meta[name="description"]', 'name', 'description').content = desc;
+    metaTag('meta[property="og:title"]', 'property', 'og:title').content = title;
+    metaTag('meta[property="og:description"]', 'property', 'og:description').content = desc;
+    $('#ld-json')?.remove();
+    if (ld) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'ld-json';
+      script.textContent = JSON.stringify(ld);
+      document.head.append(script);
+    }
+  };
+
   let firstRender = true;
   const render = () => {
     const raw = location.hash.startsWith('#/') ? location.hash.slice(1) : '/';
@@ -648,7 +684,10 @@
     closePanels({ restore: false });
     setNav(false);
     document.body.dataset.view = name;
-    document.title = view.title.includes('Needverse') ? view.title : `${view.title} — Needverse`;
+    const fullTitle = view.title.includes('Needverse') ? view.title : `${view.title} — Needverse`;
+    document.title = fullTitle;
+    setMeta(fullTitle, view.desc || DEFAULT_DESC, view.ld);
+    if (!firstRender) announcer.textContent = fullTitle;
     main.innerHTML = view.html;
     if (view.after) view.after();
     $$('.main-nav a').forEach((a) => (a.getAttribute('href') === `#${path}` ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));

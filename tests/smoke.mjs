@@ -56,6 +56,12 @@ try {
   // product page: variant, qty, add to bag
   await page.goto(`${base}#/product/relaxer`);
   assert.match(await page.textContent('h1'), /little relaxer/);
+  assert.match(await page.title(), /The little relaxer/);
+  assert.match(await page.getAttribute('meta[name="description"]', 'content'), /massage gun/i);
+  const ld = JSON.parse(await page.locator('#ld-json').textContent());
+  assert.equal(ld['@type'], 'Product');
+  assert.equal(ld.offers.price, '48.00');
+  assert.equal(ld.aggregateRating, undefined); // sample ratings stay out of structured data
   await page.click('.swatch[data-color="graphite"]');
   assert.equal(await page.textContent('#color-label'), 'Graphite');
   await page.click('[data-q="1"]');
