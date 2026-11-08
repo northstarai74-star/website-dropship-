@@ -1,0 +1,11 @@
+{
+  "name": "needverse-storefront",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Needverse storefront concept (static front-end preview)",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "build": "node scripts/build.mjs",
+    "check": "node --check app.js"
+  }
+}

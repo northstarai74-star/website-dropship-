@@ -28,9 +28,15 @@ Create a calm, minimal storefront concept for Needverse: an everyday accessories
 - Navigation links move to the relevant sections; mobile navigation opens and closes.
 - Search filters the sample product cards by name or category.
 - Category cards filter the featured items.
-- Add buttons update the example bag count and display the sample line items and subtotal.
+- Add buttons update the example bag count and display the sample line items and subtotal. The bag has quantity steppers and is remembered in `localStorage` between visits.
+- Search and category filters work together; the view is reflected in the URL (`?cat=home&q=vacuum`) so it can be shared, and a live result count is announced to screen readers.
 - Newsletter form submission displays a preview confirmation only.
 - Drawers close with their close buttons, the page scrim, or Escape.
+
+## Development
+
+- Edit the root files (`index.html`, `app.js`, `styles.css`), then run `npm run build` to regenerate `dist/`. Do not edit `dist/` by hand.
+- `npm start` serves the site locally on port 8080.
 
 ## Not connected yet
 
