@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "description": "Needverse storefront concept (static front-end preview)",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  },
   "scripts": {
     "start": "python3 -m http.server 8080",
     "build": "node scripts/build.mjs",
