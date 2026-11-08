@@ -2,55 +2,50 @@
 
 ## Goal
 
-Create a calm, minimal storefront concept for Needverse: an everyday accessories shop spanning useful home and car products. The current build is a front-end preview only. Product names, artwork, and prices are illustrative placeholders.
+A calm, minimal, full-featured storefront concept for Needverse: an everyday accessories shop spanning useful home and car products. The current build is a complete **front-end preview** (no backend). Product names, artwork, prices, ratings, reviews and policy text are illustrative placeholders.
 
-## Experience and visual direction
+## What is built
 
-- Use an editorial, product-led layout with generous whitespace, warm ivory surfaces, charcoal-brown text, and restrained material colors.
-- Take structural cues from the reference retail site: a clear hero, curated product collection, category browsing, an about/story moment, and an email section.
-- Keep Needverse's own brand, copy, and product illustrations; do not reproduce the reference's furniture assets or wording.
-- Make the experience responsive across desktop, tablet, and mobile.
-- Use custom vector product illustrations for the initial preview; replace them with approved product photography later.
+Hash-routed single-page store (works on any static host, no server rewrites needed):
 
-## Page structure
+| Route | Page |
+| --- | --- |
+| `#/` | Home: hero, trust strip, bestsellers, categories, new in, about, sample reviews |
+| `#/shop`, `#/shop/home`, `#/shop/auto` | Catalogue with category filter, sort, search results (`?sort=`, `?q=`) |
+| `#/product/<id>` | Product page: colour variants, quantity, add to bag, buy now, features, specs, box contents, sample reviews, related products |
+| `#/checkout` | Contact + delivery form, shipping method, order summary (no payment taken) |
+| `#/order` | Demo order confirmation |
+| `#/page/<slug>` | Shipping, returns, FAQ, contact, about, privacy, terms (template text) |
 
-1. Announcement bar and navigation
-2. Hero statement and featured product illustration
-3. Short brand-values ticker
-4. Featured product grid
-5. Home and auto category cards
-6. Short brand introduction
-7. Newsletter sign-up concept
-8. Footer with basic navigation and preview label
+Cross-site features: bag drawer with quantity steppers, free-shipping progress bar and promo code (`NEEDVERSE10`), bag persisted in `localStorage`, live search suggestions, accessible focus management, responsive layout, studio-lit product art generated from code in every colourway.
 
-## Front-end interactions in this preview
+## Files
 
-- Navigation links move to the relevant sections; mobile navigation opens and closes.
-- Search filters the sample product cards by name or category.
-- Category cards filter the featured items.
-- Add buttons update the example bag count and display the sample line items and subtotal. The bag has quantity steppers and is remembered in `localStorage` between visits.
-- Search and category filters work together; the view is reflected in the URL (`?cat=home&q=vacuum`) so it can be shared, and a live result count is announced to screen readers.
-- Newsletter form submission displays a preview confirmation only.
-- Drawers close with their close buttons, the page scrim, or Escape.
+- `index.html`: shell (header, footer, drawers)
+- `data.js`: catalogue, reviews, policy copy, shipping rules. **Edit products here.**
+- `art.js`: generates product images from shape + colour palette
+- `app.js`: router, views, bag, checkout
+- `styles.css`: all styles
+- `tests/smoke.mjs`: browser test (`npm test`)
 
 ## Development
 
-- Edit the root files (`index.html`, `app.js`, `styles.css`), then run `npm run build` to regenerate `dist/`. Do not edit `dist/` by hand.
-- `npm start` serves the site locally on port 8080.
+- Edit the root files, then run `npm run build` to regenerate `dist/`. Do not edit `dist/` by hand.
+- `npm start` serves the site locally on port 8080. `npm test` runs the Playwright smoke test.
 
 ## Not connected yet
 
-- Real catalog, inventory, or product images
-- Product detail pages and variant selection
-- Checkout, payments, tax, or shipping calculations
-- Order processing, fulfillment, and customer notifications
-- Newsletter storage or email marketing integration
-- Customer accounts, analytics, and legal/policy pages
+- Real catalogue, inventory and product photography (art is placeholder)
+- Payments, tax and shipping rate calculation (checkout collects details only; nothing is charged)
+- Order processing, fulfilment and customer notifications
+- Newsletter and contact form delivery
+- Customer accounts, real reviews, analytics
+- Legally reviewed policies
 
 ## Suggested next steps before launch
 
-1. Confirm the product range, suppliers, costs, margins, and serviceable regions.
-2. Replace sample names, copy, prices, and artwork with verified product information and licensed photography.
-3. Choose an ecommerce platform and connect inventory, checkout, shipping, taxes, and order management.
-4. Add customer support details, shipping/returns terms, privacy information, and other required store policies.
-5. Connect and test email signup, analytics, and the final mobile shopping flow.
+1. Confirm product range, suppliers, costs, margins and serviceable regions.
+2. Replace sample names, copy, prices, ratings and artwork with verified information and licensed photography.
+3. Choose an ecommerce platform (for example Shopify, or Stripe plus a backend) and connect inventory, checkout, shipping, taxes and order management. A platform also gives crawlable product URLs, which this hash-routed preview does not.
+4. Replace the template policies with reviewed ones and add real support details.
+5. Connect email signup and analytics, then test the full mobile shopping flow.

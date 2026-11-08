@@ -23,51 +23,105 @@ try {
   const errors = [];
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   page.on('pageerror', (e) => errors.push(e.message));
+  page.on('console', (m) => { if (m.type() === 'error' && !/fonts\.g/.test(m.text())) errors.push(m.text()); });
   await page.goto(base);
+  const cards = () => page.locator('.product-card:not([hidden])').count();
+  const waitCards = (n) => page.waitForFunction((k) => document.querySelectorAll('.product-card:not([hidden])').length === k, n);
 
-  const visible = () => page.locator('.product-card:not([hidden])').count();
-  assert.equal(await visible(), 4);
+  // home
+  assert.equal(await cards(), 8); // 4 bestsellers + 4 new
+  assert.match(await page.title(), /Needverse/);
 
-  // category + search combine; clearing search keeps the category
-  await page.click('.chip[data-filter="home"]');
+  // shop: 12 products, filter, sort, search
+  await page.goto(`${base}#/shop`);
+  assert.equal(await cards(), 12);
+  await page.click('.chip[data-cat="auto"]');
+  assert.equal(await cards(), 6);
+  await page.selectOption('#sort', 'price-asc');
+  assert.equal(await page.locator('.product-card .price').first().textContent(), '$37');
+  assert.match(page.url(), /#\/shop\/auto\?sort=price-asc/);
+  await page.goto(`${base}#/shop?q=lamp`);
+  assert.equal(await cards(), 1);
+  await page.click('[data-clear]');
+  assert.equal(await cards(), 12);
+
+  // live search suggestions + enter
   await page.click('.search-toggle');
-  await page.fill('#search-input', 'foot');
-  assert.equal(await visible(), 1);
-  assert.match(await page.locator('.result-text').textContent(), /1 product in Home for “foot”/);
-  await page.click('.search-close');
-  await page.click('.chip[data-filter="auto"]');
-  assert.equal(await visible(), 0);
-  await page.click('.result-clear');
-  assert.equal(await visible(), 2);
+  await page.fill('#search-input', 'massage');
+  assert.equal(await page.locator('.search-results li').count(), 2);
+  await page.keyboard.press('Enter');
+  assert.match(page.url(), /#\/shop\?q=massage/);
+  await waitCards(2);
 
-  // bag: add, step, remove, persist
-  await page.click('.chip[data-filter="all"]');
-  const add = page.locator('.product-card[data-id="relaxer"] [data-add]');
-  await add.click();
-  await add.click();
+  // product page: variant, qty, add to bag
+  await page.goto(`${base}#/product/relaxer`);
+  assert.match(await page.textContent('h1'), /little relaxer/);
+  await page.click('.swatch[data-color="graphite"]');
+  assert.equal(await page.textContent('#color-label'), 'Graphite');
+  await page.click('[data-q="1"]');
+  assert.match(await page.textContent('#pdp-add'), /\$96/);
+  await page.click('#pdp-add');
+  assert.equal(await page.locator('.bag-panel.open').count(), 1);
   assert.equal(await page.locator('.bag-count').textContent(), '2');
-  await page.click('.bag-button');
-  await page.click('[data-inc="relaxer"]');
-  assert.match(await page.locator('.bag-subtotal b').textContent(), /\$144/);
-  assert.equal(await page.evaluate(() => document.activeElement.dataset.inc), 'relaxer');
-  for (let i = 0; i < 3; i++) await page.click('[data-dec="relaxer"]');
-  assert.match(await page.locator('.bag-body').textContent(), /A little empty/);
-  await page.click('.bag-close');
-  await add.click();
+
+  // bag: stepper, free-shipping progress, promo
+  assert.match(await page.textContent('.ship-progress'), /unlocked free shipping/);
+  await page.click('[data-dec="relaxer|graphite"]');
+  assert.equal(await page.locator('.bag-row .qty output').textContent(), '1');
+  assert.match(await page.textContent('.ship-progress'), /\$27/);
+  await page.click('[data-inc="relaxer|graphite"]');
+  await page.click('[data-inc="relaxer|graphite"]');
+  assert.equal(await page.locator('.bag-row .qty output').textContent(), '3');
+  assert.equal(await page.evaluate(() => document.activeElement.dataset.inc), 'relaxer|graphite');
+  assert.match(await page.textContent('.ship-progress'), /unlocked free shipping/);
+  await page.fill('#promo-code', 'nope');
+  await page.press('#promo-code', 'Enter');
+  assert.match(await page.textContent('.promo-msg'), /isn.t valid/);
+  await page.fill('#promo-code', 'needverse10');
+  await page.press('#promo-code', 'Enter');
+  assert.match(await page.textContent('.promo-applied'), /NEEDVERSE10/);
+
+  // persistence
+  await page.keyboard.press('Escape');
   await page.reload();
-  assert.equal(await page.locator('.bag-count').textContent(), '1');
+  assert.equal(await page.locator('.bag-count').textContent(), '3');
 
-  // shareable URL state
-  await page.goto(`${base}?cat=auto&q=vac`);
-  assert.equal(await visible(), 1);
+  // checkout -> demo order
+  await page.goto(`${base}#/checkout`);
+  assert.match(await page.textContent('.summary-totals'), /Free/);
+  await page.check('input[value="express"]');
+  assert.match(await page.textContent('.summary-totals'), /\$14\.95/);
+  await page.fill('#f-email', 'test@example.com');
+  await page.fill('#f-given-name', 'Ada');
+  await page.fill('#f-family-name', 'Lovelace');
+  await page.fill('#f-address-line1', '1 Example Street');
+  await page.fill('#f-address-level2', 'London');
+  await page.fill('#f-address-level1', 'London');
+  await page.fill('#f-postal-code', 'N1 1AA');
+  assert.equal(await page.locator('input[type="password"], input[autocomplete^="cc-"]').count(), 0);
+  await page.click('button[type="submit"]');
+  await page.waitForSelector('.order');
+  assert.match(await page.textContent('main'), /Thank you, Ada/);
+  assert.equal(await page.locator('.bag-count').textContent(), '0');
 
-  // mobile menu closes on outside tap, no horizontal overflow
+  // info pages + 404
+  for (const slug of ['shipping', 'returns', 'faq', 'contact', 'about', 'privacy', 'terms']) {
+    await page.goto(`${base}#/page/${slug}`);
+    assert.ok((await page.locator('main h1').textContent()).length > 3, slug);
+  }
+  await page.goto(`${base}#/product/nope`);
+  assert.match(await page.textContent('main'), /Nothing here/);
+
+  // mobile: menu closes on outside tap, no horizontal overflow on key pages
   const mobile = await browser.newPage({ viewport: { width: 375, height: 800 } });
   await mobile.goto(base);
   await mobile.click('.menu-toggle');
-  await mobile.mouse.click(180, 760);
+  await mobile.mouse.click(180, 770);
   assert.equal(await mobile.locator('.main-nav.open').count(), 0);
-  assert.ok(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  for (const hash of ['#/', '#/shop', '#/product/lamp', '#/page/faq']) {
+    await mobile.goto(`${base}${hash}`);
+    assert.ok(await mobile.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `overflow on ${hash}`);
+  }
 
   assert.deepEqual(errors, []);
   console.log('smoke test passed');
