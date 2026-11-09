@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111310" />
+  <meta name="description" content="Sign in or create your Needverse account." />
+  <title>Your account — Needverse</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="account.css" />
+</head>
+<body>
+  <header class="account-header">
+    <a class="account-logo" href="index.html" aria-label="Needverse home"><img src="assets/needverse-neon-logo-clean.webp" alt="Needverse" /></a>
+    <a class="back-to-shop" href="index.html"><span aria-hidden="true">&#8592;</span> Back to the shop</a>
+  </header>
+
+  <main class="account-layout">
+    <section class="account-intro" aria-labelledby="account-intro-title">
+      <p class="account-kicker"><span></span> THE NEEDVERSE EDIT</p>
+      <h1 id="account-intro-title">Good things,<br /><em>ready when you are.</em></h1>
+      <p class="account-intro-copy">Sign in to your Needverse account and keep your everyday essentials close.</p>
+      <div class="account-orbit account-orbit-one" aria-hidden="true"></div>
+      <div class="account-orbit account-orbit-two" aria-hidden="true"></div>
+      <div class="account-coordinate" aria-hidden="true">NV / EVERYDAY, CONSIDERED</div>
+    </section>
+
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="auth-card-heading">
+        <p class="auth-eyebrow">YOUR NEEDVERSE ACCOUNT</p>
+        <h2 id="auth-title">Welcome back.</h2>
+        <p id="auth-description">Sign in to continue to your account.</p>
+      </div>
+      <div class="auth-tabs" role="tablist" aria-label="Account access">
+        <button class="auth-tab is-active" id="signin-tab" type="button" role="tab" aria-selected="true" data-auth-mode="signin">Sign in</button>
+        <button class="auth-tab" id="signup-tab" type="button" role="tab" aria-selected="false" data-auth-mode="signup">Create account</button>
+      </div>
+
+      <form id="auth-form">
+        <label class="auth-field" for="auth-email">Email address
+          <input id="auth-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+        </label>
+        <label class="auth-field" for="auth-password">Password
+          <span class="password-control"><input id="auth-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required minlength="8" /><button type="button" id="toggle-password" aria-label="Show password" aria-pressed="false">Show</button></span>
+        </label>
+        <label class="auth-field confirm-field" for="auth-confirm" hidden>Confirm password
+          <input id="auth-confirm" name="confirm" type="password" autocomplete="new-password" placeholder="Enter your password again" minlength="8" />
+        </label>
+        <button class="forgot-password" id="forgot-password" type="button">Forgot password?</button>
+        <button class="auth-submit" id="auth-submit" type="submit">Sign in <span aria-hidden="true">&#8599;</span></button>
+        <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <section class="signed-in-panel" id="signed-in-panel" aria-live="polite" hidden>
+        <div class="signed-in-mark" aria-hidden="true">&#10003;</div>
+        <p class="auth-eyebrow">YOU'RE SIGNED IN</p>
+        <h3>Good to see you.</h3>
+        <p class="signed-in-email" id="signed-in-email"></p>
+        <a class="auth-submit continue-shopping" href="index.html#featured">Continue shopping <span aria-hidden="true">&#8599;</span></a>
+        <button class="sign-out-button" id="sign-out" type="button">Sign out</button>
+        <p class="auth-status" id="session-status" role="status" aria-live="polite"></p>
+      </section>
+
+      <p class="auth-footnote">Your account is protected by Supabase authentication.</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="account.js" defer></script>
+</body>
+</html>

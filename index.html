@@ -3,79 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f5f1e8" />
-  <meta name="description" content="Needverse &mdash; considered essentials for your everyday." />
-  <title>Needverse &mdash; Everyday, considered.</title>
+  <meta name="theme-color" content="#f4f3ed" />
+  <meta name="description" content="Shop everyday essentials for home comfort, wellness, and car care at Needverse." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Needverse — Everyday, considered." />
+  <meta property="og:description" content="Thoughtful everyday essentials for home comfort, wellness, and car care." />
+  <meta property="og:image" content="assets/og-image.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Needverse — Everyday, considered." />
+  <meta name="twitter:description" content="Thoughtful everyday essentials for home comfort, wellness, and car care." />
+  <meta name="twitter:image" content="assets/og-image.webp" />
+  <title>Needverse | Everyday essentials for home, wellness &amp; car care</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="overrides.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
 </head>
 <body id="top">
   <div class="announcement"><span>Useful little upgrades for everyday life.</span><a href="#featured">Explore the collection <span aria-hidden="true">&#8599;</span></a></div>
   <header class="header">
-    <a class="wordmark" href="#top" data-filter="all" aria-label="Needverse home">needverse<span class="wordmark-dot">.</span></a>
-    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a href="#featured" data-filter="all">The edit</a>
-      <a href="#featured" data-filter="home">Home</a>
-      <a href="#featured" data-filter="auto">Car care</a>
-      <a href="#about">About Needverse</a>
+    <a class="wordmark site-logo-link" href="#top" data-filter="all" aria-label="Needverse home"><img class="site-logo" src="assets/needverse-neon-logo-clean.webp" alt="" /></a>
+    <nav class="main-nav island-nav" id="main-nav" aria-label="Main navigation">
+      <span class="island-highlight" aria-hidden="true"></span>
+      <a class="island-item" href="#featured" data-filter="all" data-island-item aria-current="page" aria-label="Shop the edit"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="4.5" width="6" height="6" rx="1.5"/><rect x="13.5" y="4.5" width="6" height="6" rx="1.5"/><rect x="4.5" y="13.5" width="6" height="6" rx="1.5"/><rect x="13.5" y="13.5" width="6" height="6" rx="1.5"/></svg><span class="island-label">Shop</span></a>
+      <a class="island-item" href="#featured" data-filter="home" data-island-item aria-label="Home comfort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 10 8-6 8 6v9.5a.5.5 0 0 1-.5.5H4.5a.5.5 0 0 1-.5-.5z"/><path d="M9 20v-6h6v6"/></svg><span class="island-label">Home</span></a>
+      <a class="island-item" href="#featured" data-filter="auto" data-island-item aria-label="Car care"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 14 1.6-5.2A2 2 0 0 1 7.5 7.4h9a2 2 0 0 1 1.9 1.4L20 14v4H4z"/><path d="M4.5 13.5h15M7 18v1.5M17 18v1.5"/><circle cx="7.5" cy="15.5" r=".8"/><circle cx="16.5" cy="15.5" r=".8"/></svg><span class="island-label">Car care</span></a>
+      <a class="island-item" href="#about" data-island-item aria-label="About Needverse"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 10.5v5M12 7.8h.01"/></svg><span class="island-label">About</span></a>
+      <a class="island-item" href="account.html" data-island-item aria-label="Your Needverse account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5.2 19.3c.8-3.2 3.2-4.8 6.8-4.8s6 1.6 6.8 4.8"/></svg><span class="island-label">Account</span></a>
+      <button class="island-item search-toggle" type="button" data-island-item aria-label="Search products" aria-expanded="false" aria-controls="search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.3 4.3"/></svg><span class="island-label">Search</span></button>
+      <button class="island-item bag-button" type="button" data-island-item aria-label="Shopping bag, 0 items" aria-expanded="false" aria-controls="bag-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 10.2a1.5 1.5 0 0 1-1.5 1.3H8a1.5 1.5 0 0 1-1.5-1.3z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg><span class="island-label">Bag</span><span class="bag-count" aria-hidden="true">0</span></button>
     </nav>
-    <div class="header-actions">
-      <button class="icon-button search-toggle" type="button" aria-label="Search products" aria-expanded="false" aria-controls="search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.3 4.3"/></svg></button>
-      <button class="bag-button" type="button" aria-label="Shopping bag, 0 items" aria-expanded="false" aria-controls="bag-panel"><span>Bag</span><span class="bag-count" aria-hidden="true">0</span></button>
-      <button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
-    </div>
+    <div class="header-actions"><button class="menu-toggle icon-button" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button></div>
   </header>
   <main>
     <section class="hero" aria-labelledby="hero-heading">
+      <canvas class="silky-hero-trail" id="hero-trail" aria-hidden="true"></canvas>
       <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span> Thoughtfully picked for real life</p>
-        <h1 id="hero-heading">A little ease<br />for <em>every day.</em></h1>
-        <p class="hero-description">Useful little upgrades for the rooms, rides, and routines you live with.</p>
-        <a class="button button-dark" href="#featured">Explore the Needverse edit <span aria-hidden="true">&#8599;</span></a>
-        <p class="hero-note">Home comforts &middot; car care &middot; everyday essentials</p>
-      </div>
-      <div class="hero-art">
-        <div class="hero-art-top"><span>NEEDVERSE &mdash; EVERYDAY EDIT</span><span>NO. 01</span></div>
-        <div class="hero-sun"></div>
-        <div class="hero-shadow"></div>
-        <svg class="hero-vacuum" viewBox="0 0 520 440" role="img" aria-label="A cordless handheld vacuum in warm ivory">
-          <defs>
-            <linearGradient id="hv-body" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f5f1e8"/><stop offset=".55" stop-color="#d9d2c5"/><stop offset="1" stop-color="#bdb5a7"/></linearGradient>
-            <linearGradient id="hv-grip" x1="0" x2="1"><stop stop-color="#d7d0c4"/><stop offset="1" stop-color="#a9a193"/></linearGradient>
-            <linearGradient id="hv-nozzle" x1="0" x2="1"><stop stop-color="#363833"/><stop offset=".6" stop-color="#191b18"/><stop offset="1" stop-color="#595b54"/></linearGradient>
-            <filter id="hv-soft"><feGaussianBlur stdDeviation="12"/></filter>
-          </defs>
-          <ellipse cx="267" cy="341" rx="166" ry="24" fill="#42443b" opacity=".2" filter="url(#hv-soft)"/>
-          <g transform="rotate(-11 260 230)">
-            <path d="M146 175 Q146 139 181 135 L341 135 Q371 135 375 165 L379 207 L144 207Z" fill="url(#hv-nozzle)"/>
-            <path d="M152 169 Q157 150 181 150 L347 150 Q363 150 366 168 L368 182 L150 182Z" fill="#6b6d65"/>
-            <path d="M147 207 L376 207 L370 233 L148 233Z" fill="#252723"/>
-            <rect x="176" y="195" width="144" height="66" rx="28" fill="#686c63" opacity=".75"/>
-            <path d="M174 215 C174 184 199 161 231 161 L302 161 C330 161 347 180 347 208 L347 259 C347 283 331 297 307 297 L213 297 C188 297 174 281 174 256Z" fill="url(#hv-body)"/>
-            <path d="M183 209 C183 187 201 174 224 174 L300 174 C320 174 337 190 337 213 L337 255 C337 274 325 285 304 285 L216 285 C195 285 183 271 183 252Z" fill="url(#hv-body)"/>
-            <path d="M226 286 L298 286 L310 355 Q312 374 292 376 L235 376 Q217 374 221 355Z" fill="url(#hv-grip)"/>
-            <path d="M241 300 L283 300 L291 349 Q293 360 281 362 L245 362 Q234 361 236 350Z" fill="#b6afa3"/>
-            <circle cx="260" cy="209" r="5" fill="#343630"/>
-            <circle cx="277" cy="209" r="5" fill="#343630"/>
-            <path d="M218 252 Q259 268 303 251" fill="none" stroke="#c1bbaf" stroke-width="2" opacity=".8"/>
-            <path d="M203 190 Q232 175 266 178" fill="none" stroke="#fff" stroke-width="3" opacity=".4" stroke-linecap="round"/>
-            <rect x="354" y="172" width="35" height="24" rx="10" fill="#2a2c28"/>
-            <path d="M388 177 L429 180 L430 190 L388 192Z" fill="#1b1d1a"/>
-            <path d="M427 178 L447 179 L446 192 L429 192Z" fill="#6c6d65"/>
-          </g>
-        </svg>
-        <div class="art-caption"><span>01</span><span>A useful little upgrade</span><span aria-hidden="true">&#8599;</span></div>
+        <p class="eyebrow"><span class="eyebrow-line"></span> Needverse everyday essentials</p>
+        <svg class="ink-filter-defs" aria-hidden="true" focusable="false"><filter id="needverse-ink-bleed" x="-24%" y="-24%" width="148%" height="148%"><feTurbulence type="fractalNoise" baseFrequency=".055 .12" numOctaves="2" seed="8" result="ink-noise"/><feDisplacementMap id="needverse-ink-warp" in="SourceGraphic" in2="ink-noise" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+        <h1 id="hero-heading" class="ink-headline" aria-label="Make everyday feel easier."><span class="ink-word">Make</span> <span class="ink-word">everyday</span><br /><span class="ink-word ink-accent">feel</span> <span class="ink-word ink-accent">easier.</span></h1>
+        <p class="hero-description">Massage and cleaning essentials for home, car, and all the little moments between.</p>
+        <a class="button button-dark" href="#featured">Shop the essentials <span aria-hidden="true">&#8599;</span></a>
       </div>
     </section>
 
-    <section class="ticker" aria-label="What we love"><div class="ticker-track"><span>Useful by nature</span><b aria-hidden="true">&#10035;</b><span>Easy on the eyes</span><b aria-hidden="true">&#10035;</b><span>Made for real life</span><b aria-hidden="true">&#10035;</b><span>Useful by nature</span><b aria-hidden="true">&#10035;</b><span>Easy on the eyes</span><b aria-hidden="true">&#10035;</b><span>Made for real life</span><b aria-hidden="true">&#10035;</b></div></section>
+    <section class="category-ribbon" aria-label="Needverse categories"><span>WELLNESS &amp; MASSAGE</span><i></i><span>CAR CLEANING</span><i></i><span>EVERYDAY HOME</span></section>
 
     <section class="featured section-wrap" id="featured">
+      <div class="info-strip" aria-label="Explore Needverse essentials">
+        <div class="info-strip-item"><span>01</span><div><b>Wellness &amp; massage</b><small>Make time to reset.</small></div></div>
+        <div class="info-strip-item"><span>02</span><div><b>Home comfort</b><small>Little upgrades for daily life.</small></div></div>
+        <div class="info-strip-item"><span>03</span><div><b>Car care</b><small>Keep your everyday drive fresh.</small></div></div>
+      </div>
       <div class="section-heading">
-        <div><p class="eyebrow"><span class="eyebrow-line"></span> The Needverse edit</p><h2>Useful finds, <em>chosen with care.</em></h2></div>
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> Shop the essentials</p><h2>Good tools for <em>daily life.</em></h2></div>
         <a class="text-link" href="#featured" data-filter="all">Browse everything <span aria-hidden="true">&#8599;</span></a>
       </div>
       <div class="filter-bar" role="group" aria-label="Filter products">
@@ -85,50 +67,102 @@
       </div>
       <div class="product-grid" id="product-grid">
         <article class="product-card" data-id="relaxer" data-category="home">
-          <div class="product-image product-image-clay"><span class="product-tag">A LITTLE RESET</span>
+          <div class="product-image product-image-clay"><span class="product-tag">MASSAGE</span><img class="product-photo" src="assets/needverse-massager.webp" alt="Cordless massage gun" loading="lazy" />
             <svg viewBox="0 0 300 260" aria-hidden="true"><ellipse cx="148" cy="216" rx="78" ry="12" fill="#4a4034" opacity=".14"/><g transform="rotate(-28 151 132)"><rect x="125" y="87" width="52" height="103" rx="19" fill="#a89883"/><rect x="130" y="52" width="42" height="79" rx="16" fill="#cbbea9"/><rect x="131" y="48" width="40" height="15" rx="7" fill="#7a6d5b"/><circle cx="151" cy="105" r="5" fill="#5a5044"/><rect x="139" y="181" width="24" height="44" rx="10" fill="#6f6454"/><path d="M131 153h40" stroke="#efe8da" stroke-width="2" opacity=".7"/></g><circle cx="219" cy="71" r="20" fill="#d9ccb4" opacity=".6"/></svg>
-            <button class="quick-add" type="button" aria-label="Add The little relaxer to bag" data-add>&#65291;</button></div>
-          <div class="product-info"><div><h3>The little relaxer</h3><p>Compact massage gun</p></div><span class="price">$48</span></div>
+            <button class="quick-add" type="button" aria-label="Add cordless massage gun to bag" data-add>&#65291;</button></div>
+          <div class="product-info"><div><h3>Cordless Massage Gun</h3><p>Wellness &amp; recovery</p><button class="product-details" type="button" data-details aria-haspopup="dialog" aria-controls="product-modal" aria-expanded="false">View details <span aria-hidden="true">&#8599;</span></button></div><span class="price">?3,999</span></div>
         </article>
         <article class="product-card" data-id="slate" data-category="auto">
-          <div class="product-image product-image-sand"><span class="product-tag">CAR, BUT CALMER</span>
+          <div class="product-image product-image-sand"><span class="product-tag">CAR CARE</span><img class="product-photo" src="assets/needverse-vacuum.webp" alt="Cordless car vacuum" loading="lazy" />
             <svg viewBox="0 0 300 260" aria-hidden="true"><ellipse cx="150" cy="209" rx="81" ry="12" fill="#444033" opacity=".12"/><g transform="rotate(-19 150 132)"><path d="M99 104h104l-3 25H98z" fill="#383b35"/><rect x="117" y="111" width="66" height="81" rx="24" fill="#d1c9b6"/><path d="M125 125h50v44h-50z" fill="#e7e0d2"/><path d="M134 190h32v31h-32z" fill="#b7ae9a"/><path d="M199 107h31v18h-31z" fill="#242621"/><path d="M226 109h28v13h-28z" fill="#4c5048"/><circle cx="151" cy="136" r="4" fill="#44463f"/><circle cx="164" cy="136" r="4" fill="#44463f"/></g><circle cx="76" cy="80" r="24" fill="#d6d0bd" opacity=".7"/></svg>
-            <button class="quick-add" type="button" aria-label="Add The clean slate to bag" data-add>&#65291;</button></div>
-          <div class="product-info"><div><h3>The clean slate</h3><p>Cordless car vacuum</p></div><span class="price">$64</span></div>
+            <button class="quick-add" type="button" aria-label="Add compact car vacuum to bag" data-add>&#65291;</button></div>
+          <div class="product-info"><div><h3>Compact Car Vacuum</h3><p>Car cleaning</p><button class="product-details" type="button" data-details aria-haspopup="dialog" aria-controls="product-modal" aria-expanded="false">View details <span aria-hidden="true">&#8599;</span></button></div><span class="price">?5,499</span></div>
         </article>
         <article class="product-card" data-id="landing" data-category="home">
-          <div class="product-image product-image-blue"><span class="product-tag">SLOW DOWN A SECOND</span>
+          <div class="product-image product-image-blue"><span class="product-tag">HOME COMFORT</span><img class="product-photo" src="assets/needverse-foot-massager.webp" alt="Home foot massager" loading="lazy" />
             <svg viewBox="0 0 300 260" aria-hidden="true"><ellipse cx="150" cy="202" rx="91" ry="17" fill="#263c3b" opacity=".13"/><path d="M63 149Q70 99 126 95h71q47 5 42 62l-10 37q-3 15-22 17H94q-25-3-29-23z" fill="#454f49"/><path d="M83 145q8-33 46-34h62q28 3 25 41l-6 28H89z" fill="#6d786f"/><path d="M109 127q-17 8-12 29m39-32q-18 14-10 34m37-34q-14 14-6 33m27-29q-12 13-5 30" fill="none" stroke="#bec4b9" stroke-width="5" stroke-linecap="round"/><path d="M82 166h149" stroke="#bac0b5" stroke-width="2" opacity=".6"/><circle cx="221" cy="84" r="18" fill="#cbd4c9" opacity=".8"/></svg>
-            <button class="quick-add" type="button" aria-label="Add The soft landing to bag" data-add>&#65291;</button></div>
-          <div class="product-info"><div><h3>The soft landing</h3><p>Air compression foot massager</p></div><span class="price">$72</span></div>
+            <button class="quick-add" type="button" aria-label="Add shiatsu foot massager to bag" data-add>&#65291;</button></div>
+          <div class="product-info"><div><h3>Shiatsu Foot Massager</h3><p>Home comfort</p><button class="product-details" type="button" data-details aria-haspopup="dialog" aria-controls="product-modal" aria-expanded="false">View details <span aria-hidden="true">&#8599;</span></button></div><span class="price">?5,999</span></div>
         </article>
         <article class="product-card" data-id="rinse" data-category="auto">
-          <div class="product-image product-image-green"><span class="product-tag">WEEKEND, SORTED</span>
+          <div class="product-image product-image-green"><span class="product-tag">WASH &amp; CARE</span><img class="product-photo" src="assets/needverse-washer.webp" alt="Portable pressure washer" loading="lazy" />
             <svg viewBox="0 0 300 260" aria-hidden="true"><ellipse cx="150" cy="212" rx="88" ry="15" fill="#3a463c" opacity=".13"/><path d="M106 93h95q18 0 18 19v78q0 13-16 16l-72-4q-23 0-25-20z" fill="#dde4d9"/><path d="M115 108h82v67h-82z" fill="#ecf0e8"/><path d="M124 101q0-19 17-19h31q14 1 14 19" fill="none" stroke="#4c5b4e" stroke-width="9"/><path d="M153 186h34l-3 39h-27z" fill="#a8b6a6"/><path d="M211 127h37l17 10-4 8-43-4" fill="#4b5a4c"/><path d="M246 136l25 4" stroke="#40473d" stroke-width="7" stroke-linecap="round"/><circle cx="87" cy="73" r="23" fill="#d4ddce" opacity=".8"/></svg>
-            <button class="quick-add" type="button" aria-label="Add The rinse cycle to bag" data-add>&#65291;</button></div>
-          <div class="product-info"><div><h3>The rinse cycle</h3><p>Portable pressure washer</p></div><span class="price">$89</span></div>
+            <button class="quick-add" type="button" aria-label="Add portable pressure washer to bag" data-add>&#65291;</button></div>
+          <div class="product-info"><div><h3>Portable Pressure Washer</h3><p>Home &amp; car cleaning</p><button class="product-details" type="button" data-details aria-haspopup="dialog" aria-controls="product-modal" aria-expanded="false">View details <span aria-hidden="true">&#8599;</span></button></div><span class="price">?7,499</span></div>
         </article>
       </div>
       <div class="no-results" role="status" hidden><p class="no-results-text">Nothing matches that just yet.</p><button class="text-link" type="button" data-filter="all">Show everything <span aria-hidden="true">&#8599;</span></button></div>
-      <p class="demo-note">A first look at the collection. Products and prices shown are placeholders.</p>
+      <p class="demo-note">Showing all products.</p>
     </section>
 
     <section class="category-section" id="categories"><div class="section-wrap">
-      <div class="section-heading category-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> Shop by category</p><h2>Everyday, made <em>easier.</em></h2></div><p class="section-aside">Thoughtful little finds for the spaces and routines you call your own.</p></div>
+      <div class="section-heading category-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> Shop by category</p><h2>Start with what <em>you need.</em></h2></div><p class="section-aside">Choose a corner of everyday life. We'll keep the edit simple.</p></div>
       <div class="category-grid">
-        <a class="category-card category-home" href="#featured" data-filter="home"><div class="category-text"><span>01 &mdash; AROUND THE HOUSE</span><h3>Home<br />comforts<span aria-hidden="true">&#8599;</span></h3><p>Small things that make coming home feel good.</p></div><div class="category-object home-object" aria-hidden="true"><div class="lamp-shade"></div><div class="lamp-neck"></div><div class="lamp-base"></div><div class="object-glow"></div></div></a>
-        <a class="category-card category-auto" href="#featured" data-filter="auto"><div class="category-text"><span>02 &mdash; OUT ON THE ROAD</span><h3>Car<br />care<span aria-hidden="true">&#8599;</span></h3><p>For a cleaner car and easier weekends away.</p></div><div class="category-object auto-object" aria-hidden="true"><div class="car-window"></div><div class="car-body"></div><div class="car-wheel wheel-one"></div><div class="car-wheel wheel-two"></div></div></a>
+        <a class="category-card category-home" href="#featured" data-filter="home"><img class="category-photo" src="assets/needverse-foot-massager.webp" alt="" loading="lazy" /><div class="category-text"><span>01 &mdash; WELLNESS &amp; HOME</span><h3>Feel good<br />at home<span aria-hidden="true">&#8599;</span></h3><p>Explore massage and comfort essentials.</p></div><div class="category-object home-object" aria-hidden="true"><div class="lamp-shade"></div><div class="lamp-neck"></div><div class="lamp-base"></div><div class="object-glow"></div></div></a>
+        <a class="category-card category-auto" href="#featured" data-filter="auto"><img class="category-photo" src="assets/needverse-washer.webp" alt="" loading="lazy" /><div class="category-text"><span>02 &mdash; CAR CLEANING</span><h3>Keep the<br />drive tidy<span aria-hidden="true">&#8599;</span></h3><p>Explore vacuums and wash-day tools.</p></div><div class="category-object auto-object" aria-hidden="true"><div class="car-window"></div><div class="car-body"></div><div class="car-wheel wheel-one"></div><div class="car-wheel wheel-two"></div></div></a>
       </div>
     </div></section>
 
     <section class="manifesto" id="about"><div class="manifesto-mark">n<span aria-hidden="true">&#10035;</span></div><p class="eyebrow"><span class="eyebrow-line"></span> About Needverse</p><h2>Everyday objects,<br /><em>a little more considered.</em></h2><p class="manifesto-copy">Useful things earn their place in our homes and our routines. Needverse brings home comforts, car care, and everyday essentials together in one thoughtful edit.</p><a href="#featured" class="text-link">Explore the collection <span aria-hidden="true">&#8599;</span></a></section>
 
-    <section class="newsletter"><div><p class="eyebrow"><span class="eyebrow-line"></span> A note from Needverse</p><h2>Everyday finds, <em>from time to time.</em></h2></div><form id="newsletter-form"><label class="sr-only" for="email">Email address</label><input id="email" type="email" name="email" autocomplete="email" placeholder="Your email address" required /><button type="submit">Join</button></form><p class="newsletter-note">Email sign-up is for preview only.</p></section>
+    <!-- re-enable after newsletter backend exists --><section class="newsletter" hidden><div><p class="eyebrow"><span class="eyebrow-line"></span> A note from Needverse</p><h2>Everyday finds, <em>from time to time.</em></h2></div><form id="newsletter-form"><label class="sr-only" for="email">Email address</label><input id="email" type="email" name="email" autocomplete="email" placeholder="Your email address" required /><button type="submit">Join</button></form><p class="newsletter-note">Sign-up is not available yet.</p></section>
   </main>
 
-  <footer class="footer"><a class="wordmark" href="#top" data-filter="all">needverse<span class="wordmark-dot">.</span></a><span>Everyday, considered.</span><div class="footer-links"><a href="#about">About</a><a href="#featured" data-filter="all">Shop</a><a href="mailto:hello@needverse.example">Say hello</a></div><small>&copy; 2026 Needverse Studio <span class="demo-label">Concept preview</span></small></footer>
+  <section class="checkout-page" id="checkout-page" aria-labelledby="checkout-title" hidden>
+    <div class="checkout-head"><button class="checkout-back" type="button" data-back-store><span aria-hidden="true">&#8592;</span> Back to the edit</button><p class="checkout-brand">needverse<span>.</span></p><span class="checkout-secure">SECURE CHECKOUT</span></div>
+    <div class="checkout-progress" aria-label="Checkout steps"><span class="is-current">01 <b>Bag</b></span><i></i><span class="is-current">02 <b>Delivery</b></span><i></i><span class="is-current">03 <b>Payment</b></span></div>
+    <div class="checkout-layout">
+      <div class="checkout-main">
+        <form id="checkout-form" autocomplete="on">
+          <div class="checkout-title-row"><div><p class="eyebrow"><span class="eyebrow-line"></span> Nearly yours</p><h1 id="checkout-title">A smoother checkout.</h1></div><span class="checkout-step-number">03 / 03</span></div>
+          <p class="checkout-demo-warning" data-test-mode>Test mode: payments run on Razorpay test credentials, so no real money is charged. Use Razorpay test card or UPI details.</p>
+          <section class="checkout-block" aria-labelledby="delivery-title"><div class="checkout-block-head"><span>01</span><div><h2 id="delivery-title">Delivery details</h2><p>Where should your everyday upgrade go?</p></div></div>
+            <div class="checkout-fields"><label>Full name<input name="name" type="text" placeholder="Full name" autocomplete="name" required /></label><label>Email address<input name="email" type="email" placeholder="you@example.com" autocomplete="email" required /></label><label class="field-wide">Street address<input name="address" type="text" placeholder="House no., street, area" autocomplete="street-address" required /></label><label>City<input name="city" type="text" placeholder="Your city" autocomplete="address-level2" required /></label><label>Postal code<input name="postal" type="text" placeholder="6-digit PIN code" autocomplete="postal-code" inputmode="numeric" maxlength="6" aria-describedby="postal-error" required /><span class="field-error" id="postal-error" role="alert" hidden>Enter a valid 6-digit Indian PIN code.</span></label></div>
+          </section>
+          <section class="checkout-block" aria-labelledby="payment-title"><div class="checkout-block-head"><span>02</span><div><h2 id="payment-title">Payment method</h2><p>How would you like to pay?</p></div></div>
+            <div class="payment-options"><label class="payment-option"><input type="radio" name="payment" value="online" checked /><span class="payment-radio"></span><span><b>Pay online</b><small>UPI, cards, netbanking &middot; secured by Razorpay</small></span><span class="payment-mark">ONLINE</span></label><label class="payment-option"><input type="radio" name="payment" value="delivery" /><span class="payment-radio"></span><span><b>Pay on delivery</b><small>Pay when your order arrives</small></span><span class="payment-mark">COD</span></label></div>
+          </section>
+          <button class="place-order-button" type="submit">Place order <span aria-hidden="true">&#8599;</span></button><p class="checkout-legal">By placing an order you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>. Payments are processed by Razorpay. Needverse never sees or stores your card details.</p>
+        </form>
+        <section class="order-confirmation" id="order-confirmation" aria-live="polite" hidden><div class="order-check" aria-hidden="true">&#10003;</div><p class="eyebrow">ORDER RECEIVED</p><h1>Order complete.</h1><p class="confirmation-copy" id="confirmation-copy">Thank you. Your order is confirmed.</p><p class="order-number">ORDER <b id="order-number">NV-000000</b></p><button class="button button-dark" type="button" data-back-store>Back to the store <span aria-hidden="true">&#8599;</span></button></section>
+      </div>
+      <aside class="checkout-summary"><p class="summary-kicker">YOUR EDIT</p><h2>Order summary</h2><div class="checkout-summary-items" id="checkout-summary-items"></div><div class="summary-line"><span>Subtotal</span><b id="checkout-subtotal">?0</b></div><div class="summary-line"><span>Delivery</span><b>Free</b></div><div class="summary-line"><span>Tax</span><span>Not itemized</span></div><div class="summary-total"><span>Estimated total</span><b id="checkout-total">?0</b></div><p>Tax is not listed as a separate line in this summary.</p></aside>
+    </div>
+  </section>
+
+  <footer class="footer nudge-footer" aria-label="Needverse footer">
+    <div class="nudge-wordmark-stage" data-nudge-stage>
+      <span class="nudge-tag nudge-tag-left" data-nudge-item>GOOD THINGS<br />FOR EVERYDAY</span>
+      <span class="nudge-orbit nudge-orbit-one" data-nudge-item aria-hidden="true"></span>
+      <a class="nudge-wordmark" href="#top" data-filter="all" aria-label="Needverse home">needverse<span>.</span></a>
+      <span class="nudge-tag nudge-tag-right" data-nudge-item>HOME · WELLNESS<br />· CAR CARE</span>
+      <span class="nudge-orbit nudge-orbit-two" data-nudge-item aria-hidden="true"></span>
+    </div>
+    <div class="nudge-footer-meta"><span>Everyday, considered.</span><div class="footer-links"><a href="#about">About</a><a href="#featured" data-filter="all">Shop</a><a href="shipping.html">Shipping</a><a href="returns.html">Returns</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a data-business-email href="#">Email support</a></div><small>&copy; 2026 <span data-business="businessName"></span><span class="footer-gstin">GSTIN <span data-business="gstin"></span></span></small></div>
+  </footer>
 
   <div class="toast" role="status" aria-live="polite"></div>
+
+  <div class="product-modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title" aria-hidden="true" inert>
+    <div class="product-modal-card"><button class="product-modal-close icon-button" type="button" aria-label="Close product details">&times;</button><div class="product-modal-image"><img id="detail-image" src="" alt="" /></div><div class="product-modal-copy"><p class="eyebrow"><span class="eyebrow-line"></span><span id="detail-category">EVERYDAY ESSENTIAL</span></p><h2 id="product-modal-title">Product name</h2><p class="detail-subtitle" id="detail-subtitle"></p><p class="detail-price" id="detail-price"></p><p class="detail-description" id="detail-description"></p><ul class="detail-features" id="detail-features"></ul><div class="detail-buy-row"><div class="quantity-stepper" aria-label="Quantity"><button type="button" data-detail-qty="-1" aria-label="Decrease quantity">-</button><output id="detail-quantity">1</output><button type="button" data-detail-qty="1" aria-label="Increase quantity">+</button></div><button class="detail-add-button" type="button" data-detail-add>Add to bag <span aria-hidden="true">&#8599;</span></button></div></div></div>
+  </div>
+
+  <div class="product-modal auth-modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-hidden="true" inert>
+    <div class="auth-card">
+      <button class="auth-close icon-button" type="button" aria-label="Close sign in">&times;</button>
+      <p class="eyebrow"><span class="eyebrow-line"></span> Your account</p>
+      <h2 id="auth-title">Sign in to add to bag</h2>
+      <p class="auth-lead" id="auth-lead">Sign in or create an account to start your bag and check out.</p>
+      <div class="auth-tabs" id="auth-tabs" role="group" aria-label="Sign in or create account"><button type="button" class="is-active" data-auth-mode="signin" aria-pressed="true">Sign in</button><button type="button" data-auth-mode="signup" aria-pressed="false">Create account</button></div>
+      <form id="auth-form" novalidate>
+        <label id="auth-email-label">Email<input id="auth-email" name="email" type="email" autocomplete="email" required /></label>
+        <label>Password<span class="password-control"><input id="auth-password" name="password" type="password" minlength="8" autocomplete="current-password" aria-describedby="password-toggle-help" required /><button class="password-toggle" id="auth-password-toggle" type="button" aria-controls="auth-password" aria-label="Show password" aria-pressed="false">Show</button><span class="sr-only" id="password-toggle-help">Toggle password visibility</span></span></label>
+        <p class="auth-message" id="auth-message" role="alert" hidden></p>
+        <button class="detail-add-button auth-submit" type="submit">Sign in</button>
+        <button class="text-link auth-forgot" id="auth-forgot" type="button">Forgot password?</button>
+      </form>
+    </div>
+  </div>
 
   <div class="search-panel" id="search-panel" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true" inert>
     <button class="search-close icon-button" type="button" aria-label="Close search">&times;</button>
@@ -140,9 +174,21 @@
   <div class="bag-panel" id="bag-panel" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true" inert>
     <div class="bag-head"><span>Your bag <b class="panel-count">(0)</b></span><button class="bag-close icon-button" type="button" aria-label="Close bag">&times;</button></div>
     <div class="bag-body"><h3>A little empty<br />in here.</h3><p>Your good finds will live here.</p><a class="button button-dark" href="#featured">Browse the edit</a></div>
-    <div class="bag-foot">Concept preview &middot; checkout isn't connected</div>
+    <div class="bag-foot">Payments secured by Razorpay</div>
   </div>
   <div class="scrim"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
   <script src="app.js"></script>
+  <script src="hero-ink.js"></script>
+  <script src="dynamic-island-nav.js"></script>
+  <script src="silky-hero-trail.js"></script>
+  <script src="nudge-footer.js"></script>
+  <script src="business-details.js"></script>
 </body>
 </html>
+ 
+ 
+
+
+

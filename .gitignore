@@ -1,3 +1,7 @@
 .sites-checkout/
 .openai/
 *.tar
+source-assets/
+source-css/
+supabase/.temp/
+npx
